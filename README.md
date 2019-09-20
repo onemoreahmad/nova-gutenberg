@@ -1,15 +1,13 @@
 # Nova Gutenberg
-This package is
-Implementation of the [Gutenberg editor](https://wordpress.org/gutenberg/) as a Laravel Nova Field based on [Laraberg](https://github.com/VanOns/laraberg).
-
-## Requirements
-- Laravel Nova
-- PHP 7.1.0+
+Forked from [Gutenberg editor](https://github.com/GeneaLabs/nova-gutenberg).
 
 ## Changes
 - [X] Change text direction ability.
 - [X] Fixed hard reload on save.
 
+## Requirements
+- Laravel Nova
+- PHP 7.1.0+
 
 ## Installation
 1. Install the package:
