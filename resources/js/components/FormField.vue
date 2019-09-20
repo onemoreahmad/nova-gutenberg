@@ -1,64 +1,81 @@
 <script>
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+    import {FormField, HandlesValidationErrors} from 'laravel-nova'
 
-export default {
-    mixins: [
-        FormField,
-        HandlesValidationErrors,
-    ],
+    window.novaGuttenbergCopy = false;
 
-    props: [
-        'field',
-        'resourceId',
-        'resourceName',
-    ],
+    export default {
+        mixins: [
+            FormField,
+            HandlesValidationErrors,
+        ],
 
-    created: function () {
-        if (window.Laraberg.editor != null) {
-            window.location.reload();
-            // window.Laraberg.editor = null;
-            // window.wp = null;
+        props: [
+            'field',
+            'resourceId',
+            'resourceName',
+        ],
+
+        mounted: function () {
+            console.log(this.direction);
+
+            if (!Laraberg.editor) {
+                Laraberg.init(this.field.name, {
+                    laravelFilemanager: true,
+                });
+
+                novaGuttenbergCopy = document.getElementById(Laraberg.editor.id)
+            } else {
+                $(novaGuttenbergCopy).insertBefore(`#${this.field.name}`);
+            }
+        },
+
+        methods: {
+            setInitialValue: function () {
+                this.value = this.field.value || '';
+            },
+
+            fill: function (formData) {
+                formData.append(this.field.attribute, Laraberg.getContent());
+            },
+
+            handleChange: function (value) {
+                this.value = value;
+            },
+        },
+        computed: {
+            direction() {
+                return this.field.direction || 'ltr';
+            }
         }
-    },
-
-    mounted: function () {
-        Laraberg.init(this.field.name, {
-            laravelFilemanager: true,
-        });
-    },
-
-    methods: {
-        setInitialValue: function () {
-            this.value = this.field.value || '';
-        },
-
-        fill: function (formData) {
-            formData.append(this.field.attribute, Laraberg.getContent());
-        },
-
-        handleChange: function (value) {
-            this.value = value;
-        },
-    },
-}
+    }
 </script>
 
 <template>
-    <default-field
-        :field="field"
-        :errors="errors"
-        :fullWidthContent="true"
-    >
-        <template
-            slot="field"
-        >
-            <textarea
-                ref="content"
-                :value="value"
-                :name="field.name"
-                :id="field.name"
-                :placeholder="field.name"
-            ></textarea>
+    <default-field :field="field" :errors="errors" :fullWidthContent="true">
+        <template slot="field">
+            <div :class="direction === 'rtl' ? 'rtl-direction': 'ltr-direction'">
+                  <textarea ref="content" hidden :value="value" :name="field.name" :id="field.name"
+                            :placeholder="field.name"
+                  ></textarea>
+            </div>
         </template>
     </default-field>
 </template>
+
+<style lang="scss">
+    .rtl-direction .editor-writing-flow {
+        direction: rtl;
+    }
+
+    .ltr-direction .editor-writing-flow {
+        direction: ltr;
+    }
+
+    .ltr-content {
+        direction: ltr;
+    }
+
+    .rtl-content {
+        direction: rtl;
+    }
+</style>

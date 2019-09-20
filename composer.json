@@ -1,5 +1,5 @@
 {
-    "name": "genealabs/nova-gutenberg",
+    "name": "vysotsky-productions/nova-gutenberg",
     "description": "Implementation of the Gutenberg editor as a Laravel Nova Field based on Laraberg.",
     "keywords": [
         "laraberg",
@@ -21,13 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "GeneaLabs\\NovaGutenberg\\": "src/"
+            "VysotskyProductions\\NovaGutenberg\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "GeneaLabs\\NovaGutenberg\\FieldServiceProvider"
+                "VysotskyProductions\\NovaGutenberg\\FieldServiceProvider"
             ]
         }
     },
