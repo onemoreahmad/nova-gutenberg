@@ -42,6 +42,3 @@ class BlogPost extends Resource
     // ...
 }
 ```
-
-### Preview
-<img width="1658" alt="Screen Shot 2019-05-22 at 12 30 21 PM" src="https://prnt.sc/p8rjfv">
