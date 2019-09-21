@@ -16,12 +16,6 @@
         ],
 
         mounted: function () {
-            // setTimeout(function () {
-            //     console.log();
-            // }, 0);
-
-            console.log(this.field.value);
-
             if (!Laraberg.editor) {
                 window.resourceId = this.resourceId;
                 window.resourceName = this.resourceName;
