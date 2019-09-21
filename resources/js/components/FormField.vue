@@ -16,18 +16,30 @@
         ],
 
         mounted: function () {
-            console.log(this.direction);
+            // setTimeout(function () {
+            //     console.log();
+            // }, 0);
+
+            console.log(this.field.value);
 
             if (!Laraberg.editor) {
+                window.resourceId = this.resourceId;
+                window.resourceName = this.resourceName;
+
                 Laraberg.init(this.field.name, {
                     laravelFilemanager: true,
                 });
 
-                novaGuttenbergCopy = document.getElementById(Laraberg.editor.id)
+                novaGuttenbergCopy = document.getElementById(Laraberg.editor.id);
             } else {
                 $(novaGuttenbergCopy).insertBefore(`#${this.field.name}`);
+
+                setTimeout(() => {
+                    Laraberg.setContent(this.field.value || "");
+                }, 0)
             }
         },
+
 
         methods: {
             setInitialValue: function () {
@@ -54,7 +66,7 @@
     <default-field :field="field" :errors="errors" :fullWidthContent="true">
         <template slot="field">
             <div :class="direction === 'rtl' ? 'rtl-direction': 'ltr-direction'">
-                  <textarea ref="content" hidden :value="value" :name="field.name" :id="field.name"
+                  <textarea ref="content" :name="field.name" :id="field.name"
                             :placeholder="field.name"
                   ></textarea>
             </div>
@@ -77,5 +89,10 @@
 
     .rtl-content {
         direction: rtl;
+    }
+
+    // Hide "return" button
+    .edit-post-fullscreen-mode-close__toolbar {
+        display: none;
     }
 </style>
