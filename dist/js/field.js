@@ -826,12 +826,6 @@ window.novaGuttenbergCopy = false;
     mounted: function mounted() {
         var _this = this;
 
-        // setTimeout(function () {
-        //     console.log();
-        // }, 0);
-
-        console.log(this.field.value);
-
         if (!Laraberg.editor) {
             window.resourceId = this.resourceId;
             window.resourceName = this.resourceName;
@@ -11121,8 +11115,10 @@ var render = function() {
               attrs: {
                 name: _vm.field.name,
                 id: _vm.field.name,
-                placeholder: _vm.field.name
-              }
+                placeholder: _vm.field.name,
+                hidden: ""
+              },
+              domProps: { value: _vm.value }
             })
           ]
         )

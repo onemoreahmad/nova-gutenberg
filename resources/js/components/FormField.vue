@@ -61,8 +61,7 @@
         <template slot="field">
             <div :class="direction === 'rtl' ? 'rtl-direction': 'ltr-direction'">
                   <textarea ref="content" :name="field.name" :id="field.name"
-                            :placeholder="field.name"
-                  ></textarea>
+                            :placeholder="field.name" :value="value" hidden></textarea>
             </div>
         </template>
     </default-field>
